@@ -1,0 +1,51 @@
+spring:
+  cloud:
+    bus:
+      trace:
+        enabled: true
+    config:
+      enabled: false
+  #国际化配置
+  servlet:
+    multipart:
+      max-file-size: 10MB
+#  messages:
+#    basename: i18n/messages
+#    encoding: utf-8
+
+mybatis:
+  type-aliases-package: com.smil.*.model
+  mapper-locations: classpath:*/mappers/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: '*'
+
+mapper:
+  identity: MYSQL
+info:
+  am-service: 1.0
+
+
+xxl:
+  job:
+    executor:
+      appname: mn-job-executor
+      port: 9997
+      logpath: ${user.home}/logs/${spring.application.name}/jobhandler
+      logretentiondays: 30
+      ip: ''
+    accessToken: ''
+
+app:
+  id: dcs-mn

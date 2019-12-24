@@ -1,0 +1,59 @@
+server:
+  port: 7763
+  tomcat:
+    basedir: /tmp/systemd-private-spring-tomcat
+
+spring:
+  application:
+    name: dcs-mn
+  cloud:
+    config:
+      label: master
+      profile: pre
+      discovery:
+        enabled: true
+        service-id: config-server
+      username: admin
+      password: Pass1q2w
+
+feign:
+  httpclient:
+    enabled: true
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://admin:Pass1q2w@172.29.0.5:8761/eureka/
+  instance:
+    prefer-ip-address: true
+    #prd环境不做以下两项配置
+    lease-renewal-interval-in-seconds: 1
+    lease-expiration-duration-in-seconds: 5
+
+
+xxl:
+  job:
+    admin:
+      addresses: 172.29.0.4:8085/xxl-job-admin
+
+ftp:
+  host: test.gds.smil.com
+  username: dcsuser
+  password: dcs#2019
+  timeout: 5000
+
+logback:
+  app_name: ${spring.application.name}
+  log_max_history: 30
+
+azure:
+  DefaultEndpointsProtocol: https
+  AccountName: eappfile
+  AccountKey: L42QJ0YKqkMA/4n+uuxta9VH29W6z4l58NvqCuKYcNHOsBLwuVOqfOecqjPPKrLzdZne5yhAf0bDIKTEihFksg==
+  EndpointSuffix: core.windows.net
+
+ribbon:
+  #请求处理的超时时间
+  ReadTimeout: 120000
+  #请求连接的超时时间
+  ConnectTimeout: 30000
