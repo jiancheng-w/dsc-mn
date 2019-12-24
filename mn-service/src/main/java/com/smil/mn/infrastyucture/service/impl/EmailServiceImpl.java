@@ -9,79 +9,57 @@ import org.apache.commons.mail.HtmlEmail;
 import org.apache.commons.text.StringSubstitutor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.mail.javamail.MimeMessageHelper;
 import org.springframework.stereotype.Service;
+
+import javax.mail.internet.MimeMessage;
 
 @Service
 public class EmailServiceImpl implements EmailService {
-    /**
-     * The Constant LOG.
-     */
-    private static final Logger LOG = LoggerFactory.getLogger(EmailServiceImpl.class);
+
+    private static final Logger logger = LoggerFactory.getLogger(EmailServiceImpl.class);
 
     /**
-     * 发送方电子邮件地址.
+     * 发送邮件地址
      */
     @Value("${smil.mail.from}")
-    private String from;
+    private String FROM;
 
-    /**
-     * 发送的主机地址（需要开通pop3服务）.
-     */
-    @Value("${smil.mail.host}")
-    private String host;
+    @Autowired
+    private JavaMailSender javaMailSender;
 
-    /**
-     * 发送的端口号.
-     */
-    @Value("${smil.mail.port}")
-    private Integer port;
 
-    /**
-     * 发送方电子邮件密码.
-     */
-    @Value("${smil.mail.password}")
-    private String password;
-
-    /**
-     * 发送方昵称.
-     */
-    @Value("${smil.mail.nickname}")
-    private String nickname;
-
-    /**
-     * {@inheritDoc}
-     */
     @Override
-    public Boolean sendHtmlEmail(MailDto mail) {
-        String content = null;
-        // 如果有占位符则进行替换
-        if (MapUtils.isNotEmpty(mail.getPlaceholder())) {
-            StringSubstitutor stringSubstitutor = new StringSubstitutor(mail.getPlaceholder());
-            content = stringSubstitutor.replace(mail.getContent());
-        } else {
-            content = mail.getContent();
-        }
-
-        HtmlEmail email = new HtmlEmail();
+    public Boolean sendEmail(MailDto mail) {
+        MimeMessage mimeMailMessage = null;
         try {
-            email.setCharset("UTF-8");
-            email.setStartTLSEnabled(Boolean.TRUE);
-            email.setHostName(host);
-            for (String str : mail.getMailToList()) {
-                email.addTo(str);
+            mimeMailMessage = javaMailSender.createMimeMessage();
+            MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMailMessage, true);
+            mimeMessageHelper.setFrom(FROM);
+            //添加收件人
+            if (mail.getMailTo().contains(";")){
+                String[] mailTo = mail.getMailTo().split(";");
+                mimeMessageHelper.setTo(mailTo);
+            }else {
+                mimeMessageHelper.setTo(mail.getMailTo());
             }
-            email.setFrom(from, nickname);
-            email.setSmtpPort(port);
-            email.setAuthentication(from, password);
-            email.setSubject(mail.getTitle());
-            email.setMsg(content);
-            email.send();
-            LOG.info("{} 发送邮件至 {}, 邮件内容:{}{}", from, StringUtils.join(mail.getMailToList(), ","), System.lineSeparator(), content);
-            return true;
-        } catch (EmailException e) {
-            LOG.error(from + "发送邮件到" + StringUtils.join(mail.getMailToList(), ",") + "失败", e);
-            return false;
+            //添加抄送人
+            if (mail.getCc().contains(";")){
+                String[] cc = mail.getCc().split(";");
+                mimeMessageHelper.setCc(cc);
+            }else {
+                mimeMessageHelper.setCc(mail.getCc());
+            }
+            mimeMessageHelper.setSubject(mail.getTitle());
+            mimeMessageHelper.setText(mail.getContent(), true);
+            javaMailSender.send(mimeMailMessage);
+            return Boolean.TRUE;
+        } catch (Exception e) {
+            logger.error("send email failed", e.getMessage());
+            return Boolean.FALSE;
         }
     }
 

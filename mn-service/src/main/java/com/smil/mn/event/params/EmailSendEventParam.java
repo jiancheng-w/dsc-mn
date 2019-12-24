@@ -9,13 +9,13 @@ public class EmailSendEventParam implements EventParam {
     /**
      * 邮件收件人集合
      */
-    private List<String> mailTo;
+    private String mailTo;
 
     /**
      *邮件抄送人
      */
     
-    private List<String> cc;
+    private String cc;
     
     /**
      * 主题
@@ -33,21 +33,21 @@ public class EmailSendEventParam implements EventParam {
      *邮件附件
      */
 
-    private List<String> attachmentList;
+    private String attachment;
 
-    public List<String> getMailTo() {
+    public String getMailTo() {
         return mailTo;
     }
 
-    public void setMailTo(List<String> mailTo) {
+    public void setMailTo(String mailTo) {
         this.mailTo = mailTo;
     }
 
-    public List<String> getCc() {
+    public String getCc() {
         return cc;
     }
 
-    public void setCc(List<String> cc) {
+    public void setCc(String cc) {
         this.cc = cc;
     }
 
@@ -67,11 +67,11 @@ public class EmailSendEventParam implements EventParam {
         this.content = content;
     }
 
-    public List<String> getAttachmentList() {
-        return attachmentList;
+    public String getAttachment() {
+        return attachment;
     }
 
-    public void setAttachmentList(List<String> attachmentList) {
-        this.attachmentList = attachmentList;
+    public void setAttachment(String attachment) {
+        this.attachment = attachment;
     }
 }

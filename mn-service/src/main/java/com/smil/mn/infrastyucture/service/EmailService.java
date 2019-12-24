@@ -9,5 +9,5 @@ public interface EmailService {
      * @param mailDto
      * @return
      */
-    Boolean sendHtmlEmail(MailDto mailDto);
+    Boolean sendEmail(MailDto mailDto);
 }

@@ -11,6 +11,8 @@
 package com.smil.mn.api.dto;
 
 
+import com.smil.mn.event.params.EmailSendEventParam;
+
 import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
@@ -28,16 +30,22 @@ public class MailDto implements Serializable {
     private String content;
 
     /** 收件人邮箱. */
-    private List<String> mailToList;
+    private String mailTo;
 
     /** 抄送人邮箱. */
-    private List<String> ccList;
+    private String cc;
 
     /** 附件地址. */
-    private List<String> attachmentList;
-    
-    /** 占位符. */
-    private Map<String, String> placeholder;
+    private String attachment;
+
+    public MailDto(EmailSendEventParam args) {
+        this.title = args.getTitle();
+        this.content = args.getContent();
+        this.mailTo = args.getMailTo();
+        this.cc = args.getCc();
+        this.attachment = args.getAttachment();
+    }
+
 
     public String getTitle() {
         return title;
@@ -55,35 +63,27 @@ public class MailDto implements Serializable {
         this.content = content;
     }
 
-    public List<String> getMailToList() {
-        return mailToList;
+    public String getMailTo() {
+        return mailTo;
     }
 
-    public void setMailToList(List<String> mailToList) {
-        this.mailToList = mailToList;
+    public void setMailTo(String mailTo) {
+        this.mailTo = mailTo;
     }
 
-    public List<String> getCcList() {
-        return ccList;
+    public String getCc() {
+        return cc;
     }
 
-    public void setCcList(List<String> ccList) {
-        this.ccList = ccList;
+    public void setCc(String cc) {
+        this.cc = cc;
     }
 
-    public List<String> getAttachmentList() {
-        return attachmentList;
+    public String getAttachment() {
+        return attachment;
     }
 
-    public void setAttachmentList(List<String> attachmentList) {
-        this.attachmentList = attachmentList;
-    }
-
-    public Map<String, String> getPlaceholder() {
-        return placeholder;
-    }
-
-    public void setPlaceholder(Map<String, String> placeholder) {
-        this.placeholder = placeholder;
+    public void setAttachment(String attachment) {
+        this.attachment = attachment;
     }
 }
