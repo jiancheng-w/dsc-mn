@@ -23,7 +23,7 @@ public class EmailServiceTest {
         mailDto.setTitle("测试邮件发送");
         mailDto.setContent("邮件通知服务内容");
         mailDto.setMailTo("18814883049@163.com");
-        mailDto.setCc("764699493@qq.com");
+        //mailDto.setCc("764699493@qq.com");
         Boolean email = emailService.sendEmail(mailDto);
         System.out.println(email);
     }

@@ -14,10 +14,10 @@ spring:
 #    encoding: utf-8
   #邮箱配置
   mail:
-    host: smtp.office365.com
-    username: jianjun.li@smil.com
+    host: smtp.qq.com
+    username: 1980871239@qq.com
     #QQ邮箱的授权码
-    password: 7!zaq12wsx
+    password: czouxldvyogadedh
     default-encoding: UTF-8
     properties:
       mail:
@@ -28,7 +28,8 @@ spring:
             required: true
 smil:
   mail:
-    from: jianjun.li@smil.com
+    from: 1980871239@qq.com
+    nickname: jiancheng
 
 mybatis:
   type-aliases-package: com.smil.*.model

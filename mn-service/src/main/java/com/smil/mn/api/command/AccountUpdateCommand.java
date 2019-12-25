@@ -1,6 +1,8 @@
 package com.smil.mn.api.command;
 
-public class AccountUpdateCommand {
+import com.smil.am.api.eventintegration.PasswordResetIntegrationEvent;
+
+public class AccountUpdateCommand implements Command {
 
     /**
      * 客户名
@@ -25,6 +27,27 @@ public class AccountUpdateCommand {
      */
 
     private String email;
+
+    /**
+     * 邮件抄送人
+     */
+
+    private String cc;
+
+
+    public AccountUpdateCommand(PasswordResetIntegrationEvent event) {
+        this.userCode = event.getUsername();
+        this.password = event.getPassword();
+        this.websiteAddress = event.getUrl();
+        this.email = event.getEmail();
+    }
+
+    public AccountUpdateCommand(String userCode, String password, String websiteAddress, String email) {
+        this.userCode = userCode;
+        this.password = password;
+        this.websiteAddress = websiteAddress;
+        this.email = email;
+    }
 
     public String getUserCode() {
         return userCode;
@@ -56,5 +79,13 @@ public class AccountUpdateCommand {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getCc() {
+        return cc;
+    }
+
+    public void setCc(String cc) {
+        this.cc = cc;
     }
 }

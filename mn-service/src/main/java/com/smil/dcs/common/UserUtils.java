@@ -28,6 +28,7 @@ public class UserUtils {
 
     public static String getUserCode() {
         return getUserInfo().getUserCode();
+//        return "test_by";
     }
 
     public static String getAppCode() {

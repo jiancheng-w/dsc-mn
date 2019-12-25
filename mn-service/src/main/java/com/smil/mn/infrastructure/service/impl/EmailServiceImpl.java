@@ -24,6 +24,12 @@ public class EmailServiceImpl implements EmailService {
     @Value("${smil.mail.from}")
     private String FROM;
 
+    /**
+     * 发件人昵称
+     */
+    @Value("${smil.mail.nickname}")
+    private String PERSONAL;
+
     @Autowired
     private JavaMailSender javaMailSender;
 
@@ -34,7 +40,7 @@ public class EmailServiceImpl implements EmailService {
         try {
             mimeMailMessage = javaMailSender.createMimeMessage();
             MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMailMessage, true);
-            mimeMessageHelper.setFrom(FROM);
+            mimeMessageHelper.setFrom(FROM,PERSONAL);
             //添加收件人
             if (StringUtils.isNotBlank(mail.getMailTo()) && mail.getMailTo().contains(";")){
                 String[] mailTo = mail.getMailTo().split(";");
@@ -54,7 +60,7 @@ public class EmailServiceImpl implements EmailService {
             javaMailSender.send(mimeMailMessage);
             return Boolean.TRUE;
         } catch (Exception e) {
-            logger.error("send email failed{}", e.getMessage());
+            logger.error("send email failed:{}", e.getMessage());
             return Boolean.FALSE;
         }
     }

@@ -1,2 +1,111 @@
-apollo:
-  meta: http://10.130.161.109:9070
+azure:
+  AccountKey: L42QJ0YKqkMA/4n+uuxta9VH29W6z4l58NvqCuKYcNHOsBLwuVOqfOecqjPPKrLzdZne5yhAf0bDIKTEihFksg==
+  AccountName: eappfile
+  DefaultEndpointsProtocol: https
+  EndpointSuffix: core.windows.net
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://admin:Pass1q2w@10.130.161.110:8761/eureka/
+    register-with-eureka: false
+  instance:
+    lease-expiration-duration-in-seconds: 5
+    lease-renewal-interval-in-seconds: 1
+    prefer-ip-address: true
+feign:
+  httpclient:
+    enabled: true
+ftp:
+  host: test.gds.smil.com
+  password: dcs#2019
+  timeout: 15000
+  username: dcsuser
+jco:
+  client:
+    ashost: 10.155.20.73
+    client: 100
+    lang: zh
+    passwd: p@ss1234
+    r3name: ECD
+    saprouter: /H/202.101.6.131
+    sysnr: 0
+    user: DCS
+  destination:
+    peak_limit: 150
+    pool_capacity: 30
+  sapConstants:
+    kostl: 9000999
+logback:
+  app_name: mn-service
+  log_max_history: 30
+ribbon:
+  ConnectTimeout: 30000
+  ReadTimeout: 120000
+server:
+  port: 5763
+  tomcat:
+    basedir: /tmp/systemd-private-spring-tomcat
+smil:
+  mail:
+    from: jianjun.li@smil.com
+    host: smtp.office365.com
+    nickname: jianjun
+    password: 3!zaq12wsx
+    port: 587
+spring:
+  main:
+    allow-bean-definition-overriding: true
+  application:
+    name: mn-service
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    hikari:
+      auto-commit: true
+      connection-test-query: SELECT 1
+      connection-timeout: 30000
+      idle-timeout: 30000
+      max-lifetime: 1800000
+      maximum-pool-size: 15
+      minimum-idle: 5
+      pool-name: DatebookHikariCP
+    password: ZZxx@1q2w
+    type: com.zaxxer.hikari.HikariDataSource
+    url: jdbc:mysql://10.130.161.107/smil_dcs_mn?useUnicode=true&characterEncoding=utf8&useSSL=false&useTimezone=true&serverTimezone=UTC&allowMultiQueries=true&zeroDateTimeBehavior=convertToNull
+    username: smiladmin
+  rabbitmq:
+    host: 10.130.161.114
+    password: Pass1q2w
+    port: 5672
+    username: admin
+  redis:
+    database: 1
+    host: 10.130.161.108
+    lettuce:
+      pool:
+        max-active: 16
+        max-idle: 8
+        max-wait: -1
+        min-idle: 0
+    password: Pass1q2w
+    port: 6379
+    timeout: 5000
+  zipkin:
+    base-url: http://10.130.161.110:9411/
+    enabled: true
+    sender:
+      type: RABBIT
+  cloud:
+    stream:
+      bindings:
+        input:
+          destination: dcs-sit-event
+          group: dcs-mn
+        output:
+          destination: dcs-sit-event
+      default-binder: rabbit
+xxl:
+  job:
+    admin:
+      addresses: 10.130.161.109:8085/xxl-job-admin
+

@@ -11,7 +11,7 @@ public interface MailConstant {
      * DN创建内容
      */
     //String DN_CREATE_CONTENT = "Dear ${userCode}:\r\n  Your order ${orderNo} delivery note has been created, this accessory is ${partInfo}. \r\n \r\nRegards!\r\n\r\n";
-    String DN_CREATE_CONTENT = "Dear ${userCode}:\r\n  Your order ${orderNo} delivery note has been created. \r\n \r\nRegards!\r\n\r\n";
+    String DN_CREATE_CONTENT = "Dear  %s :\r\n  Your order %s  delivery note has been created. \r\n \r\nRegards!\r\n\r\n";
 
     /**
      * 账户创建主题
@@ -20,7 +20,7 @@ public interface MailConstant {
     /**
      * 账户创建内容
      */
-    String ACCOUNT_CREATE_CONTENT = "Dear ${userCode}:\r\n  Your account has been created, please click <a href=\"${websiteAddress}\">${websiteAddress}</a> to login. The login account is: ${userCode}, and the password is: ${password}. \r\n \r\nRegards!\r\n\r\n";
+    String ACCOUNT_CREATE_CONTENT = "Dear #  %s :\r\n  Your account has been created, please click <a href=\" %s \"> %s </a> to login. The login account is:  %s , and the password is: %s . \r\n \r\nRegards!\r\n\r\n";
 
     /**
      * 密码修改主题
@@ -30,32 +30,7 @@ public interface MailConstant {
     /**
      * 账户密码修改内容
      */
-    String ACCOUNT_PASSWORD_UPDATE_CONTENT = "Dear ${userCode}:\r\n  Your password has been updated, please click <a href=\"${websiteAddress}\">${websiteAddress}</a> to login. The login account is: ${userCode}, and the password is: ${password}. \r\n \r\nRegards!\r\n\r\n";
-
-    /**
-     * 客户称呼
-     */
-    String USER_CODE = "userCode";
-
-    /**
-     * 密码
-     */
-    String PASSWORD = "password";
-
-    /**
-     * 网络地址
-     */
-    String WEBSITE_ADDRESS = "websiteAddress";
-
-    /**
-     * 订单号
-     */
-    String ORDER_NO = "orderNo";
-
-    /**
-     * 配件信息
-     */
-    String PART_INFO = "partInfo";
+    String ACCOUNT_PASSWORD_UPDATE_CONTENT = "Dear %s :\r\n  Your password has been updated, please click <a href=\" %s \"> %s </a> to login. The login account is: %s , and the password is: %s . \r\n \r\nRegards!\r\n\r\n";
 
     /**
      * 邮件发送最大重试次数

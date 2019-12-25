@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 @Component
 public class EmailSendFailedEventListener extends BaseHandler {
@@ -17,6 +18,7 @@ public class EmailSendFailedEventListener extends BaseHandler {
     private static final Logger logger = LoggerFactory.getLogger(EmailSendFailedEventListener.class);
 
     @EventListener
+    @Transactional
     public void emailSendEvent(EmailSendFailedEvent failedEvent){
         logger.info("send email failed param {}", JSON.toJSONString(failedEvent));
         EmailSendFailedEventParam args = failedEvent.getArgs();

@@ -1,6 +1,8 @@
 package com.smil.mn.api.command;
 
-public class AccountCreatedCommand {
+import com.smil.am.api.eventintegration.CreateUserIntegrationEvent;
+
+public class AccountCreatedCommand implements Command {
 
     /**
      * 客户名
@@ -25,6 +27,19 @@ public class AccountCreatedCommand {
      */
 
     private String email;
+
+    /**
+     * 邮件抄送人
+     */
+
+    private String cc;
+
+    public AccountCreatedCommand(CreateUserIntegrationEvent event) {
+        this.userCode = event.getAccount();
+        this.password = event.getPassword();
+        this.websiteAddress = event.getUrl();
+        this.email = event.getEmail();
+    }
 
     public String getUserCode() {
         return userCode;
@@ -56,5 +71,13 @@ public class AccountCreatedCommand {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getCc() {
+        return cc;
+    }
+
+    public void setCc(String cc) {
+        this.cc = cc;
     }
 }

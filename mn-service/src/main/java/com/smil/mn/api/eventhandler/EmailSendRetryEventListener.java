@@ -15,6 +15,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 @Component
 public class EmailSendRetryEventListener extends BaseHandler {
@@ -22,6 +23,7 @@ public class EmailSendRetryEventListener extends BaseHandler {
     private static final Logger logger = LoggerFactory.getLogger(EmailSendRetryEventListener.class);
 
     @EventListener
+    @Transactional
     public void emailSendEvent(EmailSendRetryEvent retryEvent){
         logger.info("send email retry param {}", JSON.toJSONString(retryEvent));
         EmailSendRetryEventParam args = retryEvent.getArgs();

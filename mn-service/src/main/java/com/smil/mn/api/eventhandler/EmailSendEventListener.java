@@ -12,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
 @Component
 public class EmailSendEventListener extends BaseHandler {
@@ -19,6 +20,7 @@ public class EmailSendEventListener extends BaseHandler {
     private static final Logger logger = LoggerFactory.getLogger(EmailSendEventListener.class);
 
     @EventListener
+    @Transactional
     public void emailSendEvent(EmailSendEvent emailSendEvent) {
         logger.info("send email param {}", JSON.toJSONString(emailSendEvent));
         EmailSendEventParam args = emailSendEvent.getArgs();
