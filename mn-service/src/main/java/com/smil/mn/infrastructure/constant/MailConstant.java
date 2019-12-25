@@ -41,4 +41,6 @@ public interface MailConstant {
 
     Byte BYTE_ZERO = 0;
 
+    String EVENT_USER_CODE = "integration";
+
 }

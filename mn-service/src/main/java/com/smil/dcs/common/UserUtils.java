@@ -1,5 +1,7 @@
 package com.smil.dcs.common;
 
+import com.smil.mn.infrastructure.constant.MailConstant;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -27,8 +29,8 @@ public class UserUtils {
     }
 
     public static String getUserCode() {
-        return getUserInfo().getUserCode();
-//        return "test_by";
+//        return getUserInfo().getUserCode();
+        return MailConstant.EVENT_USER_CODE;
     }
 
     public static String getAppCode() {
