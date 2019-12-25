@@ -46,6 +46,9 @@ public class MailDto implements Serializable {
         this.attachment = args.getAttachment();
     }
 
+    public MailDto() {
+    }
+
 
     public String getTitle() {
         return title;

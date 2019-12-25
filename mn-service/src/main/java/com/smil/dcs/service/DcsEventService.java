@@ -11,7 +11,7 @@ public interface DcsEventService {
 
     <T extends IntegrationEvent> void publish(T event);
 
-    void rebuild();
+    /*void rebuild();*/
 
     void insertToEvent(AbstractEvent<?> event);
 }

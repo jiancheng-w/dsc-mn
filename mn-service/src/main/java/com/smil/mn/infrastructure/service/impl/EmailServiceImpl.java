@@ -1,12 +1,8 @@
-package com.smil.mn.infrastyucture.service.impl;
+package com.smil.mn.infrastructure.service.impl;
 
 import com.smil.mn.api.dto.MailDto;
-import com.smil.mn.infrastyucture.service.EmailService;
-import org.apache.commons.collections.MapUtils;
+import com.smil.mn.infrastructure.service.EmailService;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.mail.EmailException;
-import org.apache.commons.mail.HtmlEmail;
-import org.apache.commons.text.StringSubstitutor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,17 +36,17 @@ public class EmailServiceImpl implements EmailService {
             MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(mimeMailMessage, true);
             mimeMessageHelper.setFrom(FROM);
             //添加收件人
-            if (mail.getMailTo().contains(";")){
+            if (StringUtils.isNotBlank(mail.getMailTo()) && mail.getMailTo().contains(";")){
                 String[] mailTo = mail.getMailTo().split(";");
                 mimeMessageHelper.setTo(mailTo);
             }else {
                 mimeMessageHelper.setTo(mail.getMailTo());
             }
             //添加抄送人
-            if (mail.getCc().contains(";")){
+            if (StringUtils.isNotBlank(mail.getCc()) && mail.getCc().contains(";")){
                 String[] cc = mail.getCc().split(";");
                 mimeMessageHelper.setCc(cc);
-            }else {
+            }else if (StringUtils.isNotBlank(mail.getCc())){
                 mimeMessageHelper.setCc(mail.getCc());
             }
             mimeMessageHelper.setSubject(mail.getTitle());
@@ -58,7 +54,7 @@ public class EmailServiceImpl implements EmailService {
             javaMailSender.send(mimeMailMessage);
             return Boolean.TRUE;
         } catch (Exception e) {
-            logger.error("send email failed", e.getMessage());
+            logger.error("send email failed{}", e.getMessage());
             return Boolean.FALSE;
         }
     }

@@ -15,7 +15,7 @@ import tk.mybatis.spring.annotation.MapperScan;
 @EnableCaching
 @EnableFeignClients
 @EnableApolloConfig
-@MapperScan
+@MapperScan(basePackages = {"com.smil.mn.infrastructure.mappers", "com.smil.dcs.mappers"})
 public class MnServiceApplication {
 
     public static void main(String[] args) {

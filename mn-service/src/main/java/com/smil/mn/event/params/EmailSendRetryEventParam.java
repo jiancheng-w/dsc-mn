@@ -2,8 +2,7 @@ package com.smil.mn.event.params;
 
 import com.smil.dcs.model.EventParam;
 
-
-public class EmailSendEventParam implements EventParam {
+public class EmailSendRetryEventParam implements EventParam {
 
     /**
      * 邮件收件人集合
@@ -40,13 +39,13 @@ public class EmailSendEventParam implements EventParam {
 
     private Byte retryTimes;
 
-    public EmailSendEventParam(EmailSendRetryEventParam args) {
+    public EmailSendRetryEventParam(EmailSendEventParam args) {
         this.mailTo = args.getMailTo();
         this.cc = args.getCc();
         this.title = args.getTitle();
         this.content = args.getContent();
         this.attachment = args.getAttachment();
-        this.retryTimes = (byte)(args.getRetryTimes() + 1);
+        this.retryTimes = args.getRetryTimes();
     }
 
     public String getMailTo() {

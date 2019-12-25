@@ -1,4 +1,4 @@
-package com.smil.mn.infrastyucture.constant;
+package com.smil.mn.infrastructure.constant;
 
 public interface MailConstant {
 
@@ -61,5 +61,9 @@ public interface MailConstant {
      * 邮件发送最大重试次数
      */
     Byte MAX_RETRY_NUM = 3;
+
+    Byte BYTE_ONE = 1;
+
+    Byte BYTE_ZERO = 0;
 
 }

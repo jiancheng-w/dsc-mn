@@ -1,4 +1,4 @@
-package com.smil.mn.infrastyucture.service;
+package com.smil.mn.infrastructure.service;
 
 import com.smil.mn.api.dto.MailDto;
 

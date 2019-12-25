@@ -1,5 +1,9 @@
 package com.smil.mn.domain.model;
 
+import com.smil.mn.event.params.EmailSendFailedEventParam;
+import com.smil.mn.event.params.EmailSendSuccessEventParam;
+import com.smil.mn.infrastructure.constant.MailConstant;
+
 import javax.persistence.Column;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -46,7 +50,7 @@ public class OutMailBox {
     private String attachment;
 
     /**
-     * 状态
+     * 状态 0表示失败,1表示成功
      */
     @Column(name = "data_status")
     private Byte dataStatus;
@@ -81,6 +85,43 @@ public class OutMailBox {
     @Column(name = "update_time")
     private Date updateTime;
 
+    public OutMailBox(EmailSendSuccessEventParam args) {
+        this.mailTo = args.getMailTo();
+        this.cc = args.getCc();
+        this.title = args.getTitle();
+        this.content = args.getContent();
+        this.attachment = args.getAttachment();
+        this.dataStatus = MailConstant.BYTE_ONE;
+        this.retryTimes = args.getRetryTimes();
+        this.createTime = new Date();
+        this.updateTime = new Date();
+    }
+
+    public OutMailBox(String mailTo, String cc, String title, String content, String attachment, Byte dataStatus, Byte retryTimes, String createdBy, Date createTime, String updatedBy, Date updateTime) {
+        this.mailTo = mailTo;
+        this.cc = cc;
+        this.title = title;
+        this.content = content;
+        this.attachment = attachment;
+        this.dataStatus = dataStatus;
+        this.retryTimes = retryTimes;
+        this.createdBy = createdBy;
+        this.createTime = createTime;
+        this.updatedBy = updatedBy;
+        this.updateTime = updateTime;
+    }
+
+    public OutMailBox(EmailSendFailedEventParam args) {
+        this.mailTo = args.getMailTo();
+        this.cc = args.getCc();
+        this.title = args.getTitle();
+        this.content = args.getContent();
+        this.attachment = args.getAttachment();
+        this.dataStatus = MailConstant.BYTE_ZERO;
+        this.retryTimes = args.getRetryTimes();
+        this.createTime = new Date();
+        this.updateTime = new Date();
+    }
 
     public Long getId() {
         return id;

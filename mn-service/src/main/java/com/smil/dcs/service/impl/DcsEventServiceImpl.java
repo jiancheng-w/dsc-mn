@@ -6,8 +6,8 @@ import com.smil.dcs.model.AbstractEvent;
 import com.smil.dcs.model.domainevent.DomainEvent;
 import com.smil.dcs.service.DcsEventService;
 import com.smil.mc.api.integrationevent.IntegrationEvent;
-import com.smil.mc.domain.model.Event;
-import com.smil.mc.infrastructure.mappers.EventMapper;
+import com.smil.mn.domain.model.MailEvent;
+import com.smil.mn.infrastructure.mappers.MailEventMapper;
 import org.reflections.Reflections;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -33,7 +33,7 @@ public class DcsEventServiceImpl implements DcsEventService {
     private ApplicationEventPublisher applicationEventPublisher;
 
     @Autowired
-    private EventMapper eventMapper;
+    private MailEventMapper eventMapper;
 
     @Autowired
     private Source source;
@@ -65,10 +65,10 @@ public class DcsEventServiceImpl implements DcsEventService {
     }
 
     public void insertToEvent(AbstractEvent<?> event) {
-        eventMapper.insert(new Event(event));
+        eventMapper.insert(new MailEvent(event));
     }
 
-    @Override
+    /*@Override
     public void rebuild() {
         Reflections reflections = new Reflections("com.smil.mc.event");
         Set<Class<? extends AbstractEvent>> subTypesOfAbstractEvent = reflections.getSubTypesOf(AbstractEvent.class);
@@ -98,5 +98,5 @@ public class DcsEventServiceImpl implements DcsEventService {
                 applicationEventPublisher.publishEvent(event);
             }
         });
-    }
+    }*/
 }

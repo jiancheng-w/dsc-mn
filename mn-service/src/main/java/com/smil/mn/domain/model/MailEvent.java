@@ -2,7 +2,7 @@ package com.smil.mn.domain.model;
 
 import com.smil.dcs.common.UserUtils;
 import com.smil.dcs.model.AbstractEvent;
-import com.smil.mn.infrastyucture.mappers.MailEventMapper;
+import com.smil.mn.infrastructure.mappers.MailEventMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import javax.persistence.Column;
