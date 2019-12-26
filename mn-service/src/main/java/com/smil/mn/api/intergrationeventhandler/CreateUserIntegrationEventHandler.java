@@ -22,7 +22,7 @@ public class CreateUserIntegrationEventHandler {
 
     @EventListener
     @Transactional
-    public void passwordReset(CreateUserIntegrationEvent event) {
+    public void createUser(CreateUserIntegrationEvent event) {
         logger.info("account created IntegrationEvent, event: {}", JSON.toJSONString(event));
         if (null != event){
             AccountCreatedCommand createdCommand = new AccountCreatedCommand(event);

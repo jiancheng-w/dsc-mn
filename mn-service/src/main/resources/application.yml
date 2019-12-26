@@ -12,24 +12,6 @@ spring:
 #  messages:
 #    basename: i18n/messages
 #    encoding: utf-8
-  #邮箱配置
-  mail:
-    host: smtp.qq.com
-    username: 1980871239@qq.com
-    #QQ邮箱的授权码
-    password: czouxldvyogadedh
-    default-encoding: UTF-8
-    properties:
-      mail:
-        smtp:
-          auth: true
-          starttls:
-            enable: true
-            required: true
-smil:
-  mail:
-    from: 1980871239@qq.com
-    nickname: jiancheng
 
 mybatis:
   type-aliases-package: com.smil.*.model
@@ -53,17 +35,6 @@ mapper:
   identity: MYSQL
 info:
   am-service: 1.0
-
-
-xxl:
-  job:
-    executor:
-      appname: mn-job-executor
-      port: 9997
-      logpath: ${user.home}/logs/${spring.application.name}/jobhandler
-      logretentiondays: 30
-      ip: ''
-    accessToken: ''
 
 app:
   id: dcs-mn

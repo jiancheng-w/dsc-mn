@@ -48,12 +48,23 @@ server:
     basedir: /tmp/systemd-private-spring-tomcat
 smil:
   mail:
-    from: jianjun.li@smil.com
-    host: smtp.office365.com
-    nickname: jianjun
-    password: 3!zaq12wsx
-    port: 587
+    from: noreply@smil.com
+    nickname: DCS-DEV
 spring:
+  #邮箱配置
+  mail:
+    host: smtp.office365.com
+    username: noreply@smil.com
+    #QQ邮箱的授权码
+    password: Smi1@123
+    default-encoding: UTF-8
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+            required: true
   main:
     allow-bean-definition-overriding: true
   application:
@@ -78,18 +89,6 @@ spring:
     password: Pass1q2w
     port: 5672
     username: admin
-  redis:
-    database: 1
-    host: 10.130.161.108
-    lettuce:
-      pool:
-        max-active: 16
-        max-idle: 8
-        max-wait: -1
-        min-idle: 0
-    password: Pass1q2w
-    port: 6379
-    timeout: 5000
   zipkin:
     base-url: http://10.130.161.110:9411/
     enabled: true
@@ -104,7 +103,3 @@ spring:
         output:
           destination: dcs-sit-event
       default-binder: rabbit
-xxl:
-  job:
-    admin:
-      addresses: 10.130.161.109:8085/xxl-job-admin
