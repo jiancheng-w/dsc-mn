@@ -3,6 +3,7 @@ package com.smil.mn.event.params;
 import com.smil.dcs.model.EventParam;
 import com.smil.mn.api.command.AccountCreatedCommand;
 import com.smil.mn.api.command.AccountUpdateCommand;
+import com.smil.mn.api.command.DnCreatedCommand;
 import com.smil.mn.infrastructure.constant.MailConstant;
 
 
@@ -69,6 +70,16 @@ public class EmailSendEventParam implements EventParam {
         this.content = String.format(MailConstant.ACCOUNT_CREATE_CONTENT,"test account",
                 createdCommand.getWebsiteAddress(),createdCommand.getWebsiteAddress(),createdCommand.getUserCode(),
                 createdCommand.getPassword());
+        this.retryTimes = MailConstant.BYTE_ZERO;
+    }
+
+    public EmailSendEventParam(DnCreatedCommand dnCreatedCommand) {
+
+        this.mailTo = dnCreatedCommand.getEmail();
+        this.cc = dnCreatedCommand.getCc();
+        this.title = MailConstant.DN_CREATE_SUBJECT;
+        this.content = String.format(MailConstant.DN_CREATE_CONTENT,"test account",
+                dnCreatedCommand.getOrderNo());
         this.retryTimes = MailConstant.BYTE_ZERO;
     }
 

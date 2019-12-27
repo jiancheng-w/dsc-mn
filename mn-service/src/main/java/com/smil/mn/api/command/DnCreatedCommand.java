@@ -1,14 +1,11 @@
 package com.smil.mn.api.command;
 
+import com.smil.lm.api.integrationevent.DnCreatedEventIntegrationEvent;
+
+import java.util.Date;
 import java.util.Map;
 
 public class DnCreatedCommand implements Command {
-
-    /**
-     * DN类型 用来区分是领用单还是销售单(0-领用,1-销售)
-     */
-
-    private Byte dnType;
 
     /**
      * dn号
@@ -22,10 +19,6 @@ public class DnCreatedCommand implements Command {
 
     private String orderNo;
 
-    /**
-     * 配件信息
-     */
-    private Map<String,String> partMap;
 
     /**
      * 收件人邮箱
@@ -34,18 +27,32 @@ public class DnCreatedCommand implements Command {
     private String email;
 
     /**
-     * 客户名
+     * 抄送人
      */
 
-    private String customerName;
+    private String cc;
 
+    /**
+     * 事件时间
+     */
 
-    public Byte getDnType() {
-        return dnType;
+    private Date createTime;
+
+    public DnCreatedCommand(DnCreatedEventIntegrationEvent event) {
+        this.dnNo = event.getDnNo();
+        this.orderNo = event.getSalesOrderNo();
+        this.email = event.getEmail();
+        this.cc = event.getCcEmail();
+        this.createTime = event.getCreateTime();
+
     }
 
-    public void setDnType(Byte dnType) {
-        this.dnType = dnType;
+    public DnCreatedCommand(String dnNo, String orderNo, String email, String cc, Date createTime) {
+        this.dnNo = dnNo;
+        this.orderNo = orderNo;
+        this.email = email;
+        this.cc = cc;
+        this.createTime = createTime;
     }
 
     public String getDnNo() {
@@ -64,14 +71,6 @@ public class DnCreatedCommand implements Command {
         this.orderNo = orderNo;
     }
 
-    public Map<String, String> getPartMap() {
-        return partMap;
-    }
-
-    public void setPartMap(Map<String, String> partMap) {
-        this.partMap = partMap;
-    }
-
     public String getEmail() {
         return email;
     }
@@ -80,11 +79,19 @@ public class DnCreatedCommand implements Command {
         this.email = email;
     }
 
-    public String getCustomerName() {
-        return customerName;
+    public String getCc() {
+        return cc;
     }
 
-    public void setCustomerName(String customerName) {
-        this.customerName = customerName;
+    public void setCc(String cc) {
+        this.cc = cc;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
     }
 }
